@@ -1,0 +1,25 @@
+# Virtual Environment
+env1/
+
+# Python Cache Files 
+__pycache__/
+*.pyc
+
+# Secret Keys
+.env
+
+# Local DB
+db.sqlite3
+
+# Media
+media/
+
+# Static Files
+staticfiles/
+
+# System Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

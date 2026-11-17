@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Dashboard</title>
+    <!-- Google Fonts & CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/hospital_page.css">
+</head>
+
+<body>
+    <header>
+        <a class="logo" href="/">Blood<span>Nation</span>❤️</a>
+        <nav>
+            <ul class="navlist">
+                <li><a href="home_page.html">Home</a></li>
+                <li><a href="hospital_page.html">Dashboard</a></li>
+                <li><a href="login.html">Register/Login</a></li>
+                <li><button id="logoutHos">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2></h2>
+        <hr>
+        <h3>Doctors</h3>
+        <div class="hospitalDiv" id="doctorHos"></div>
+        <hr>
+        <h3>Donors</h3>
+        <div class="hospitalDiv" id="donorHos"></div>
+        <hr>
+        <h3>Patients</h3>
+        <div class="hospitalDiv" id="patientHos"></div>
+        <hr>
+        <h3>Blood Stats</h3>
+        <div class="hospitalDiv" id="bloodHos"></div>
+        <hr>
+        <h3>Blood Requests</h3>
+        <div class="hospitalDiv" id="requestHos"></div>
+    </main>
+
+    <script src="JS/auth.js"></script>
+    <script src="JS/hospital_page.js"></script>
+</body>
+
+</html>

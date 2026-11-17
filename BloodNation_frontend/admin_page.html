@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Google Fonts & CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/admin_page.css">
+</head>
+
+<body>
+    <header>
+        <a class="logo" href="/">Blood<span>Nation</span>❤️</a>
+        <nav>
+            <ul class="navlist">
+                <li><a href="home_page.html">Home</a></li>
+                <li><a href="admin_page.html">Dashboard</a></li>
+                <li><a href="login.html">Register/Login</a></li>
+                <li><button id="logoutAdmin">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2></h2>
+        <hr>
+        <h3>Statistics</h3>
+        <div class="adminDiv" id="statsAdmin">
+            <div class="statsDiv" id="totalHos"></div>
+            <div class="statsDiv" id="totalDoc"></div>
+            <div class="statsDiv" id="totalDon"></div>
+            <div class="statsDiv" id="totalPat"></div>
+            <div class="statsDiv" id="totalReq"></div>
+            <div class="statsDiv" id="completeReq"></div>
+            <div class="statsDiv" id="leftReq"></div>
+        </div>
+        <hr>
+        <h3>Hospitals</h3>
+        <div class="adminDiv" id="hospitalsAdmin"></div>
+        <hr>
+        <h3>Users</h3>
+        <div class="adminDiv" id="usersAdmin"></div>
+        <hr>
+        <h3>Blood Requests</h3>
+        <div class="adminDiv" id="requestAdmin"></div>
+        <hr>
+        <h3>Donation Reqeusts</h3>
+        <div class="adminDiv" id="donationAdmin"></div>
+    </main>
+
+    <script src="JS/auth.js"></script>
+    <script src="JS/admin_page.js"></script>
+</body>
+
+</html>

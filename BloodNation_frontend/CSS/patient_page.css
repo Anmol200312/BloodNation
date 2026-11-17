@@ -1,0 +1,269 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    max-width: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background-image: linear-gradient(to right, rgb(165, 118, 165), purple);
+}
+
+header {
+    width: 100%;
+    height: 40px;
+    background-image: linear-gradient(to right, rgb(165, 118, 165), purple);
+    padding: 5px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+nav {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo span {
+    color: #f8a5c2;
+}
+
+
+.heart-icon {
+    color: red;
+    font-size: 18px;
+}
+
+#logoutPat {
+    width: 80px;
+    padding: 3px;
+    border-radius: 4px;
+    border: 1px solid rgb(121, 21, 21);
+    background-color: purple;
+    color: white;
+}
+
+#logoutPat:hover,
+#logoutPat:focus {
+    outline: none;
+    background-color: purple;
+    border-color: rgb(69, 69, 229);
+    box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
+}
+
+.navlist {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    list-style: none;
+    gap: 40px;
+}
+
+.navlist a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.navlist a:hover,
+.navlist a.active {
+    color: #f8a5c2;
+}
+
+header .logo:hover,
+header .logo.active {
+    color: #f8a5c2;
+}
+
+main {
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    align-items: center;
+    justify-content: stretch;
+    padding: 0px 20px;
+    padding-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+}
+
+hr {
+    width: 30%;
+    border: none;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 25px auto;
+    border-radius: 2px;
+}
+
+h3 {
+    font-size: x-large;
+    text-align: center;
+    font-weight: bolder;
+    margin-bottom: 20px;
+    color: rgb(121, 21, 21);
+}
+
+.patientDiv {
+    width: calc(1500px - 20px);
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: large;
+    font-weight: bold;
+}
+
+
+
+.proDivTwo:hover,
+.bloodDivTwo:hover,
+.reqDivTwo:hover,
+.handleDivTwo:hover {
+    border: 1px solid rgb(121, 21, 21);
+    transform: translateY(-8px) scale(1.03);
+}
+
+
+#profilePat,
+#bloodStockPat,
+#requestPat {
+    display: flex;
+    flex-direction: column;
+}
+
+#bloodStockPat {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#bloodStockPat::-webkit-scrollbar {
+    width: 8px;
+}
+
+#bloodStockPat::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+#bloodStockPat::-webkit-scrollbar-thumb {
+    background: rgb(121, 21, 21);
+    border-radius: 10px;
+}
+
+#bloodStockPat::-webkit-scrollbar-thumb:hover {
+    background: #f8a5c2;
+}
+
+.proDivOne {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    gap: 10px;
+}
+
+.bloodDivOne {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    gap: 10px;
+}
+
+.reqDivOne {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: 100%;
+    gap: 10px;
+}
+
+
+h4 {
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+}
+
+h5 {
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: rgb(121, 21, 21);
+    transition: 0.3s ease;
+}
+
+h5:hover {
+    color: rgb(69, 69, 229);
+    transform: translateY(-8px) scale(1.03);
+}
+
+.proDivTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: white;
+    color: rgb(69, 69, 229);
+    border: 1px solid rgb(86, 86, 135);
+    transition: 0.3s ease;
+}
+
+.bloodDivTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: white;
+    color: rgb(69, 69, 229);
+    border: 1px solid rgb(86, 86, 135);
+    transition: 0.3s ease;
+}
+
+.reqDivTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: white;
+    color: rgb(69, 69, 229);
+    border: 1px solid rgb(86, 86, 135);
+    transition: 0.3s ease;
+}
