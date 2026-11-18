@@ -28,22 +28,21 @@ async function accountActivateRequest() {
         const result = await response.json();
 
         if (response.status === 200) {
-            statusHeading.textContent = "Account already active";
-            statusMessage.textContent = "Your account is already activated. Redirecting to login."
-            setTimeout(() => {
-                window.location.href = 'login.html';
-            }, 3000);
+            if (result.message === "User account is already activated") {
+                statusHeading.textContent = "Account already active";
+                statusMessage.textContent = "Your account is already activated. Redirecting to login...";
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 3000);
+            } else {
+                statusHeading.textContent = "Verified Successfully";
+                statusMessage.textContent = "Thank you for activating your account. Click the button below to log in.";
 
-        }
-
-        else if (response.status === 200) {
-            statusHeading.textContent = "Verified Successfully";
-            statusMessage.textContent = "Thank you for activating your account.To go on login page click button below."
-
-            loginRedirectButton.style.display = 'block';
-            loginRedirectButton.onclick = () => {
-                window.location.href = 'login.html'
-            };
+                loginRedirectButton.style.display = 'block';
+                loginRedirectButton.onclick = () => {
+                    window.location.href = 'login.html';
+                };
+            }
         }
 
         else if (response.status === 400) {

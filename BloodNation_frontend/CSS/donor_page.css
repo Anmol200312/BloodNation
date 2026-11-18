@@ -155,6 +155,35 @@ h3 {
     flex-direction: column;
 }
 
+#matchDon,
+#donationDon {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#matchDon::-webkit-scrollbar,
+#donationDon::-webkit-scrollbar {
+    width: 8px;
+}
+
+#matchDon::-webkit-scrollbar-track,
+#donationDon::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+#matchDon::-webkit-scrollbar-thumb,
+#donationDon::-webkit-scrollbar-thumb {
+    background: rgb(121, 21, 21);
+    border-radius: 10px;
+}
+
+#matchDon::-webkit-scrollbar-thumb:hover,
+#donationDon::-webkit-scrollbar-thumb:hover {
+    background: #f8a5c2;
+}
+
 .proDivOne {
     display: grid;
     grid-template-columns: repeat(7, 1fr);

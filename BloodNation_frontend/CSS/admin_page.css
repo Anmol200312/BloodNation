@@ -120,7 +120,7 @@ hr {
     border-radius: 2px;
 }
 
-h3 {
+.headingTop {
     font-size: x-large;
     text-align: center;
     font-weight: bolder;
@@ -165,6 +165,7 @@ h3 {
 .requestDivTwo:hover,
 .donorDivTwo:hover {
     border: 1px solid rgb(121, 21, 21);
+    box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
     transform: translateY(-8px) scale(1.03);
 }
 
@@ -176,6 +177,47 @@ h3 {
     display: flex;
     flex-direction: column;
 }
+
+
+#hospitalsAdmin,
+#usersAdmin,
+#requestAdmin,
+#donationAdmin {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#hospitalsAdmin::-webkit-scrollbar,
+#usersAdmin::-webkit-scrollbar,
+#requestAdmin::-webkit-scrollbar,
+#donationAdmin::-webkit-scrollbar {
+    width: 8px;
+}
+
+#hospitalsAdmin::-webkit-scrollbar-track,
+#usersAdmin::-webkit-scrollbar-track,
+#requestAdmin::-webkit-scrollbar-track,
+#donationAdmin::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+#hospitalsAdmin::-webkit-scrollbar-thumb,
+#usersAdmin::-webkit-scrollbar-thumb,
+#requestAdmin::-webkit-scrollbar-thumb,
+#donationAdmin::-webkit-scrollbar-thumb {
+    background: rgb(121, 21, 21);
+    border-radius: 10px;
+}
+
+#hospitalsAdmin::-webkit-scrollbar-thumb:hover,
+#usersAdmin::-webkit-scrollbar-thumb:hover,
+#requestAdmin::-webkit-scrollbar-thumb:hover,
+#donationAdmin::-webkit-scrollbar-thumb:hover {
+    background: #f8a5c2;
+}
+
 
 .hosDivOne {
     display: grid;
@@ -284,4 +326,50 @@ h5:hover {
     color: rgb(69, 69, 229);
     border: 1px solid rgb(86, 86, 135);
     transition: 0.3s ease;
+}
+
+
+.selectDiv {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    background: transparent;
+    border: none;
+    padding: 10px;
+}
+
+.headingBottom {
+    grid-column: 2;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bolder;
+    color: rgb(121, 21, 21);
+    margin-bottom: 0px;
+}
+
+
+.inputDiv {
+    grid-column: 3;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.inputDiv input {
+    width: 260px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    border: 1px solid rgb(121, 21, 21);
+    background-color: white;
+    color: rgb(69, 69, 229);
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.inputDiv input:focus {
+    border: 1px solid rgb(69, 69, 229);
+    box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
+    transform: translateY(-7px) scale(1.0);
 }

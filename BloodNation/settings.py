@@ -153,7 +153,7 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'account.User'
 
-SITE_DOMAIN = "http://127.0.0.1:5500"
+SITE_DOMAIN = os.getenv('SITE_DOMAIN', 'http://127.0.0.1:5500/Project5_BloodDonation_system/BloodNation_frontend')
 SITE_NAME = 'BloodNation'
 LOGIN_URL = 'account:login'
 

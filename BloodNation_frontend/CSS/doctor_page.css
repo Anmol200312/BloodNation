@@ -157,6 +157,40 @@ h3 {
     flex-direction: column;
 }
 
+#bloodStockDoc,
+#requestDoc,
+#handleReqDoc {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#bloodStockDoc::-webkit-scrollbar,
+#requestDoc::-webkit-scrollbar,
+#handleReqDoc::-webkit-scrollbar {
+    width: 8px;
+}
+
+#bloodStockDoc::-webkit-scrollbar-track,
+#requestDoc::-webkit-scrollbar-track,
+#handleReqDoc::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+#bloodStockDoc::-webkit-scrollbar-thumb,
+#requestDoc::-webkit-scrollbar-thumb,
+#handleReqDoc::-webkit-scrollbar-thumb {
+    background: rgb(121, 21, 21);
+    border-radius: 10px;
+}
+
+#bloodStockDoc::-webkit-scrollbar-thumb:hover,
+#requestDoc::-webkit-scrollbar-thumb:hover,
+#handleReqDoc::-webkit-scrollbar-thumb:hover {
+    background: #f8a5c2;
+}
+
 .proDivOne {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

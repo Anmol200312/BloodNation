@@ -54,7 +54,7 @@ nav {
 }
 
 
-.navlist {
+#navlistOne {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -62,7 +62,16 @@ nav {
     gap: 40px;
 }
 
-.navlist a {
+#navlistTwo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    list-style: none;
+    gap: 40px;
+}
+
+#navlistOne a,
+#navlistTwo a {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.9);
     font-size: 15px;
@@ -70,10 +79,33 @@ nav {
     transition: 0.3s ease;
 }
 
-.navlist a:hover,
-.navlist a.active {
+#navlistOne a:hover,
+#navlistOne a.active {
     color: #f8a5c2;
 }
+
+#navlistTwo a:hover,
+#navlistTwo a.active {
+    color: #f8a5c2;
+}
+
+#logoutButton {
+    width: 80px;
+    padding: 3px;
+    border-radius: 4px;
+    border: 1px solid rgb(121, 21, 21);
+    background-color: purple;
+    color: white;
+}
+
+#logoutButton:hover,
+#logoutButtonn:focus {
+    outline: none;
+    background-color: purple;
+    border-color: rgb(69, 69, 229);
+    box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
+}
+
 
 header .logo:hover,
 header .logo.active {

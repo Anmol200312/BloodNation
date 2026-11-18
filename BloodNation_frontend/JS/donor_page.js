@@ -24,7 +24,7 @@ async function loadDashboard() {
                     <div class="proDivTwo"><h5>Email</h5>${pro.email || 'N/A'}</div>
                     <div class="proDivTwo"><h5>Address</h5>${pro.address || 'Not Provided'}</div>
                     <div class="proDivTwo"><h5>Blood Group</h5>${pro.blood_group}</div>
-                    <div class="proDivTwo"><h5>Admit Hospital</h5>${pro.hospital_details.name || 'None'}</div> 
+                    <div class="proDivTwo"><h5>Admit Hospital</h5>${pro.hospital_details?.name || 'None'}</div> 
                     <div class="proDivTwo"><h5>Disease History</h5>${pro.disease_history || 'None'}</div> 
                     <div class="proDivTwo"><h5>Is eligible</h5>${pro.is_eligible ? 'Yes' : 'No'}</div> 
                     <div class="proDivTwo"><h5>Last Donation</h5>${pro.last_donation_date || 'Never'}</div> 

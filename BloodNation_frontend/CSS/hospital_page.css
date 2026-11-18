@@ -159,6 +159,50 @@ h3 {
     flex-direction: column;
 }
 
+#doctorHos,
+#donorHos,
+#patientHos,
+#bloodHos,
+#requestHos {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#doctorHos::-webkit-scrollbar,
+#donorHos::-webkit-scrollbar,
+#patientHos::-webkit-scrollbar,
+#bloodHos::-webkit-scrollbar,
+#requestHos::-webkit-scrollbar {
+    width: 8px;
+}
+
+#doctorHos::-webkit-scrollbar-track,
+#donorHos::-webkit-scrollbar-track,
+#patientHos::-webkit-scrollbar-track,
+#bloodHos::-webkit-scrollbar-track,
+#requestHos::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+#doctorHos::-webkit-scrollbar-thumb,
+#donorHos::-webkit-scrollbar-thumb,
+#patientHos::-webkit-scrollbar-thumb,
+#bloodHos::-webkit-scrollbar-thumb,
+#requestHos::-webkit-scrollbar-thumb {
+    background: rgb(121, 21, 21);
+    border-radius: 10px;
+}
+
+#doctorHos::-webkit-scrollbar-thumb:hover,
+#donorHos::-webkit-scrollbar-thumb:hover,
+#patientHos::-webkit-scrollbar-thumb:hover,
+#bloodHos::-webkit-scrollbar-thumb:hover,
+#requestHos::-webkit-scrollbar-thumb:hover {
+    background: #f8a5c2;
+}
+
 .docDivOne {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

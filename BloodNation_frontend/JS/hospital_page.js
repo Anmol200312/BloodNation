@@ -3,6 +3,7 @@ const donors = document.getElementById('donorHos');
 const patients = document.getElementById('patientHos');
 const bloodStocks = document.getElementById('bloodHos');
 const bloodRequests = document.getElementById('requestHos');
+const heading = document.querySelector('h2');
 
 document.getElementById('logoutHos').addEventListener('click', logoutUser);
 
@@ -18,6 +19,7 @@ async function loadDashboard() {
 
         if (response.status == 200) {
             if (Array.isArray(result.doctors) && result.doctors.length > 0) {
+                heading.innerHTML = result.name || result.hospital_name || 'None';
                 doctors.innerHTML = result.doctors.map(doc => `
                     <h4>${doc.name}</h4>
                     <div class="docDivOne">
@@ -37,7 +39,7 @@ async function loadDashboard() {
                     <div class="donDivOne">
                     <div class="donDivTwo"><h5>Email</h5>${don.email}</div>
                     <div class="donDivTwo"><h5>City</h5>${don.city || 'Not Provided'}</div>
-                    <div class="donDivTwo"><h5>Last Donation Date</h5>${new Date(don.last_donation_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+                    <div class="donDivTwo"><h5>Last Donation Date</h5>${don.last_donation_date ? new Date(don.last_donation_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Never Donated'}</div>
                     <div class="donDivTwo"><h5>Blood Group</h5>${don.blood_group}</div>
                     <div class="donDivTwo"><h5>Disease History</h5>${don.disease_history}</div>
                     <div class="donDivTwo"><h5>Is Eligible</h5>${don.is_eligible ? 'Yes' : 'No'}</div>

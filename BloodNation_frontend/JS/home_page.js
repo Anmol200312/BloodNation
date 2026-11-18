@@ -1,3 +1,8 @@
+document.addEventListener('DOMContentLoaded', () => {
+    authorization('/api/check_auth/');
+})
+
+
 let slideIndex = 0;
 showSlides();
 
@@ -7,8 +12,6 @@ function showSlides() {
     for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
-
-
 
     slideIndex++;
     if (slideIndex > slides.length) {
@@ -35,3 +38,5 @@ rightButton.addEventListener("click", () => {
 leftButton.addEventListener("click", () => {
     cardContainer.scrollLeft -= 600;
 });
+
+

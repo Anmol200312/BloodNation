@@ -1,5 +1,5 @@
 from django.urls import path
-from account.views import DoctorRegisterAPIView,ActivateDoctorByHospitalAPIView,DonorRegisterAPIView,PatientRegisterAPIView,LoginAPIView,ActivateAccountAPIView,ResetEmailConfirmAPIView,ResetPasswordAPIView,ChangePasswordAPIView,AdminDashboardAPIView,HospitalDashboardAPIView,BloodRequestListCreateAPIView,DonorAccesptRequestAPIView,HospitalSceduleRequestAPIView,DonorDashboardAPIView,PatientDashboardAPIView,DoctorDashboardAPIView
+from account.views import DoctorRegisterAPIView,ActivateDoctorByHospitalAPIView,CheckAuthAPIView,DonorRegisterAPIView,PatientRegisterAPIView,LoginAPIView,ActivateAccountAPIView,ResetEmailConfirmAPIView,ResetPasswordAPIView,ChangePasswordAPIView,AdminDashboardAPIView,HospitalDashboardAPIView,BloodRequestListCreateAPIView,DonorAccesptRequestAPIView,HospitalSceduleRequestAPIView,DonorDashboardAPIView,PatientDashboardAPIView,DoctorDashboardAPIView
 from rest_framework_simplejwt.views import TokenRefreshView
 
 app_name = 'account'
@@ -30,5 +30,6 @@ urlpatterns = [
     path('api/blood_request/<int:pk>/schedule/',HospitalSceduleRequestAPIView.as_view(),name='hospital_schdule_request'),
 
     #auth token
-    path('api/token/refresh/',TokenRefreshView.as_view(), name='token_refresh')
+    path('api/token/refresh/',TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/check_auth/',CheckAuthAPIView.as_view(),name='check_auth')
 ]

@@ -18,8 +18,7 @@
         <nav>
             <ul class="navlist">
                 <li><a href="home_page.html">Home</a></li>
-                <li><a href="admin_page.html">Dashboard</a></li>
-                <li><a href="login.html">Register/Login</a></li>
+                <li><a href="change_password.html">Reset Password</a></li>
                 <li><button id="logoutAdmin">Logout</button></li>
             </ul>
         </nav>
@@ -28,7 +27,7 @@
     <main>
         <h2></h2>
         <hr>
-        <h3>Statistics</h3>
+        <h3 class="headingTop">Statistics</h3>
         <div class="adminDiv" id="statsAdmin">
             <div class="statsDiv" id="totalHos"></div>
             <div class="statsDiv" id="totalDoc"></div>
@@ -39,16 +38,31 @@
             <div class="statsDiv" id="leftReq"></div>
         </div>
         <hr>
-        <h3>Hospitals</h3>
+        <div class="selectDiv">
+            <h3 class="headingBottom">Hospitals</h3>
+            <div class="inputDiv"><input type="text" id="inputHos" placeholder="Filter" autocomplete="off"></div>
+        </div>
         <div class="adminDiv" id="hospitalsAdmin"></div>
         <hr>
-        <h3>Users</h3>
+
+        <div class="selectDiv">
+            <h3 class="headingBottom">Users</h3>
+            <div class="inputDiv"><input type="text" id="inputUsers" placeholder="Filter" autocomplete="off"></div>
+        </div>
         <div class="adminDiv" id="usersAdmin"></div>
         <hr>
-        <h3>Blood Requests</h3>
+
+        <div class="selectDiv">
+            <h3 class="headingBottom">Blood Requests</h3>
+            <div class="inputDiv"><input type="text" id="inputReq" placeholder="Filter" autocomplete="off"></div>
+        </div>
         <div class="adminDiv" id="requestAdmin"></div>
         <hr>
-        <h3>Donation Reqeusts</h3>
+
+        <div class="selectDiv">
+            <h3 class="headingBottom">Donation Reqeusts</h3>
+            <div class="inputDiv"><input type="text" id="inputDon" placeholder="Filter" autocomplete="off"></div>
+        </div>
         <div class="adminDiv" id="donationAdmin"></div>
     </main>
 

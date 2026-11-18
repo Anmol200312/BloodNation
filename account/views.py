@@ -15,6 +15,7 @@ from account.models import User, Hospital, Doctor, Donor, Patient, BloodRequest,
 from account.utils import send_activation_email,send_updation_email
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
+from account.permissions import IsAdmin,IsDoctor,IsDonor,IsHospital,IsPatient
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.shortcuts import get_object_or_404
 
@@ -290,7 +291,7 @@ class ChangePasswordAPIView(APIView):
 
 class AdminDashboardAPIView(APIView):
 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdmin]
 
     def get(self,request):
         if request.user.role != 'admin':
@@ -322,7 +323,7 @@ class AdminDashboardAPIView(APIView):
 
 class HospitalDashboardAPIView(APIView):
 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsHospital|IsAdmin]
 
     def get(self,request):
 
@@ -352,7 +353,7 @@ class HospitalDashboardAPIView(APIView):
 
 
 class PatientDashboardAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsPatient|IsAdmin]
 
     def get(self,request):
         if request.user.role != 'patient':
@@ -375,7 +376,7 @@ class PatientDashboardAPIView(APIView):
 
 
 class DoctorDashboardAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsDoctor|IsAdmin]
 
     def get(self,request):
         if request.user.role != 'doctor':
@@ -394,7 +395,7 @@ class DoctorDashboardAPIView(APIView):
 
 
 class DonorDashboardAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsDonor|IsAdmin]
 
     def get(self,request):
         if request.user.role != 'donor':
@@ -507,6 +508,14 @@ class HospitalSceduleRequestAPIView(APIView):
         except BloodRequest.DoesNotExist:
             return Response({'message':"Blood request not found"},status=status.HTTP_404_NOT_FOUND)
     
+
+class CheckAuthAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self,request):
+        return Response({
+            "role":request.user.role
+        },status=status.HTTP_200_OK)
 
 
 
