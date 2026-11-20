@@ -10,13 +10,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+        integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="CSS/home_page.css">
 </head>
 
 <body>
 
-    <header>
+    <header class="notranslate">
         <a class="logo" href="/">Blood<span>Nation</span>❤️</a>
         <nav>
             <ul id="navlistOne">
@@ -24,10 +26,16 @@
                 <li><a href="#aboutSection">About Us</a></li>
                 <li><a href="#contactSection">Contact Us</a></li>
                 <li><a href="login.html">Register/Login</a></li>
+                <li>
+                    <div class="gtranslate_wrapper"></div>
+                </li>
             </ul>
-            <ul id="navlistTwo">
+            <ul id="navlistTwo" style="display: none;">
                 <li id="dashboardLink">Dashboard</li>
                 <li><button id="logoutButton">Logout</button></li>
+                <li>
+                    <div class="gtranslate_wrapper"></div>
+                </li>
             </ul>
         </nav>
     </header>
@@ -220,40 +228,70 @@
             <h2 class="contactHeading">
                 Get In Touch With Us
             </h2>
-            <div class="contactContainer">
-                <div class="contactInfo">
-                    <h3>
-                        We Are Always Ready To Help
-                    </h3>
-                    <p>
-                        If you have any emergency requests,
-                        suggestions, or questions, feel free
-                        to contact us anytime.
-                    </p>
-                    <div class="contactDetail">
-                        <span>📍</span>
+            <div class="bothContainers">
+                <div class="contactContainerLeft">
+                    <div class="contactInfo">
+                        <h3>
+                            We Are Always Ready To Help
+                        </h3>
                         <p>
-                            Moradabad, Uttar Pradesh, India
+                            If you have any emergency requests,
+                            suggestions, or questions, feel free
+                            to contact us anytime.
                         </p>
+                        <div class="contactDetail">
+                            <span>📍</span>
+                            <p>
+                                Moradabad, Uttar Pradesh, India
+                            </p>
+                        </div>
+                        <div class="contactDetail">
+                            <span>📞</span>
+                            <p>
+                                +91 9876543210
+                            </p>
+                        </div>
+                        <div class="contactDetail">
+                            <span>✉️</span>
+                            <p>
+                                support@bloodnation.com
+                            </p>
+                        </div>
                     </div>
-                    <div class="contactDetail">
-                        <span>📞</span>
-                        <p>
-                            +91 9876543210
-                        </p>
+                </div>
+
+                <div id="logoRight">
+                    <div id="logoDiv"><i class="fa-solid fa-user-tie fa-3x" style="color: #f8a5c2;"></i>
                     </div>
-                    <div class="contactDetail">
-                        <span>✉️</span>
-                        <p>
-                            support@bloodnation.com
-                        </p>
+                    <a id="chatLogoFirst" href="javascript:void(0)" class="notranslate">Blood<span>Nation AI</span></a>
+                </div>
+
+                <div id="chatBoxRight" style="display: none;">
+                    <div id="chat-header" class="notranslate">
+                        <a class="chatLogo" href="/">Blood<span>Nation</span>❤️</a>
+                        <div id="closeChat"><i class="fa-solid fa-xmark" style="color: white;"></i></div>
                     </div>
+                    <div id="chat-messages"></div>
+                    <form id="chatForm">
+                        <input type="text" id="inputChat"
+                            placeholder="Hello! I am BloodNation AI. Ask me anything related to Blood and BloodNation"
+                            required autocomplete="off">
+                        <div class="buttonDiv"><button type="button" id="deleteButton">DeleteAll</button></div>
+                        <div class="buttonDiv"><button type="submit" id="chatButton">Ask</button></div>
+                    </form>
                 </div>
             </div>
         </div>
     </main>
-    <script src="JS/allAuth.js"></script>
+
+
+    <script src="JS/allAuth.js" defer></script>
+    <script src="JS/chatBot.js" defer></script>
     <script src="JS/home_page.js" defer></script>
+
+    <script>window.gtranslateSettings = { "default_language": "en", "detect_browser_language": true, "languages": ["en", "hi"], "wrapper_selector": ".gtranslate_wrapper" }</script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/ln.js" defer></script>
+
 
 </body>
 

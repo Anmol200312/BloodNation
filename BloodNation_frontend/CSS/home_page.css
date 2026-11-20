@@ -468,6 +468,11 @@ main {
     width: 100%;
 }
 
+.bothContainers {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    width: 100%;
+}
 
 .contactSmall {
     text-align: center;
@@ -487,7 +492,7 @@ main {
     font-weight: 700;
 }
 
-.contactContainer {
+.contactContainerLeft {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -522,4 +527,186 @@ main {
 
 .contactDetail span {
     font-size: 28px;
+}
+
+
+#logoRight {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+#logoDiv {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#chatLogoFirst {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+#chatLogoFirst span {
+    color: #f8a5c2;
+}
+
+#chatLogoFirst:hover,
+#chatLogoFirst:active {
+    color: #f8a5c2;
+}
+
+
+
+#chatBoxRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 500px;
+    height: 380px;
+    border: 1px solid white;
+    border-radius: 8px;
+}
+
+#chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: 1px solid white;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    padding: 0px 5px;
+    border-radius: 8px;
+}
+
+.chatLogo {
+    display: flex;
+    justify-content: flex-start;
+    gap: 4px;
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+#chat-messages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 6px;
+}
+
+.chatLogo span {
+    color: #f8a5c2;
+}
+
+.heart-icon {
+    color: red;
+    font-size: 18px;
+}
+
+.chatLogo:hover,
+.chatLogo:active {
+    color: #f8a5c2;
+}
+
+#chatForm {
+    width: 100%;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#inputChat {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 45px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid white;
+    transition: 0.3s ease;
+    outline: none;
+}
+
+
+#deleteButton {
+    width: 100%;
+    border-radius: 4px;
+    border-style: none;
+    padding: 4px;
+    background-color: white;
+    transition: 0.3s ease;
+    margin-bottom: 4px;
+    color: blue;
+}
+
+#deleteButton:hover {
+    background-color: #ff4da6;
+    color: white;
+}
+
+
+#deleteButton:focus {
+    transform: translateY(-4px) scale(1.0);
+}
+
+#chatButton {
+    width: 100%;
+    border-radius: 4px;
+    border-style: none;
+    padding: 4px;
+    background-color: white;
+    transition: 0.3s ease;
+    margin-bottom: 4px;
+    color: blue;
+}
+
+#chatButton:hover {
+    background-color: #ff4da6;
+    color: white;
+}
+
+#inputChat:focus {
+    border-color: blue;
+    transform: translateY(4px) scale(1.0);
+}
+
+#chatButton:focus {
+    transform: translateY(-4px) scale(1.0);
+}
+
+@keyframes spinLeftToRight {
+    0% {
+        transform: perspective(400px) rotateY(0deg);
+    }
+
+    10% {
+        transform: perspective(400px) rotateY(360deg);
+    }
+
+    100% {
+        transform: perspective(400px) rotateY(360deg);
+    }
+}
+
+#logoDiv i {
+    display: inline-block;
+    animation: spinLeftToRight 6s ease-in-out infinite;
 }

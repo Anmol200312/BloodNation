@@ -1,4 +1,8 @@
 from rest_framework.views import APIView
+import os
+import requests
+from django.db.models import Sum
+from django.utils import timezone
 from rest_framework.response import Response
 from rest_framework import status
 from django.conf import settings
@@ -9,12 +13,12 @@ from account.serializer import (
     DonorSerializer, DoctorSerializer, HospitalSerializer, PatientSerializer,
     BloodStockSerializer, BloodRequestSerializer, BloodDonationSerializer,
     HospitalDetailSerializer, AdminDashboardSerializer,
-    LoginSerializer, ResetPasswordSerializer, ResetPasswordConfirmSerializer, ChangePasswordSerializer
+    LoginSerializer, ResetPasswordSerializer, ResetPasswordConfirmSerializer, ChangePasswordSerializer,ChatBotSerializer
 )
 from account.models import User, Hospital, Doctor, Donor, Patient, BloodRequest, BloodStock, BloodDonation
 from account.utils import send_activation_email,send_updation_email
 from django.contrib.auth import authenticate
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from account.permissions import IsAdmin,IsDoctor,IsDonor,IsHospital,IsPatient
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.shortcuts import get_object_or_404
@@ -518,5 +522,88 @@ class CheckAuthAPIView(APIView):
         },status=status.HTTP_200_OK)
 
 
+class ChatbotAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self,request):
+        serializer = ChatBotSerializer(data=request.data)
+        if not serializer.is_valid():
+            error_message = serializer.errors.get('input_field',['Invalid input'])[0]
+            return Response({'message':error_message},status=status.HTTP_400_BAD_REQUEST)
+
+        user_message = serializer.validated_data.get('input_field')
+
+        completed_request = BloodRequest.objects.filter(status="completed").count()
+
+        today = timezone.now().date()
+        total_hospitals = Hospital.objects.count()
+        total_doctors = Doctor.objects.count()
+        total_donors = Donor.objects.count()
+        total_patients = Patient.objects.count()
+        total_blood_requests = BloodRequest.objects.count()
+        completed_requests = completed_request
+
+        stock_summary = BloodStock.objects.values('blood_group').annotate(total_units=Sum('quantity_in_units'))
+
+        available_blood_text = ", ".join(
+        [f"{item['blood_group']}: {item['total_units']} units" for item in stock_summary if item['total_units'] > 0]
+        ) or "Currently no blood units are listed in stock."
 
 
+        system_prompt = f"""
+        You are the official AI Assistant for 'BloodNation', a blood donation and emergency healthcare platform.
+
+        STRICT RULES:
+        1. ONLY answer questions related to BloodNation,blood,blood types, blood diseases, blood treatments, home remedies, blood inventions and discoveries, what causes blood diseases and their precautions, medicines, when to see doctor, what to do in emergency situations, blood donation, blood groups, medical eligibility, or the live statistics below.
+        2. If the user still asks anything unrelated, refuse by saying: "I am the BloodNation AI Assistant. I can only help with queries related to BloodNation and blood donation."
+        3. Keep answers polite, accurate, and concise (2 to 4 sentences).
+
+        ABOUT BLOODNATION:
+        - What it does: Connects blood donors, patients, doctors, and verified hospitals/blood banks in real time for fast emergency blood requests.
+        - Why it was built: Created to save lives during medical emergencies and surgeries by providing live blood stock visibility and instant donor matching.
+
+        - Total Hospitals: {total_hospitals}
+        - Today: {today}
+        - Total Doctors: {total_doctors}
+        - Total Donors: {total_donors}
+        - Total Patients: {total_patients}
+        - Requests Managed Today: {total_blood_requests}
+        - Completed Requests: {completed_requests}
+        - Available Blood Stock: {available_blood_text}
+
+        """
+
+        api_key = os.getenv('GEMINI_API_KEY')
+        models_to_try = [
+            "gemini-3.5-flash-lite",
+            "gemini-3.8-flash"
+        ]
+
+        payload = {
+            "contents": [{
+                "parts": [{"text": f"{system_prompt}\n\nUser Question: {user_message}"}]
+            }]
+        }
+
+        for model_name in models_to_try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
+            try:
+                response = requests.post(url, json=payload, timeout=25)
+                data = response.json()
+
+                if 'candidates' in data:
+                    message = data['candidates'][0]['content']['parts'][0]['text']
+                    return Response({'message': message}, status=status.HTTP_200_OK)
+
+                print(f"Model {model_name} failed:", data.get('error', {}).get('message'))
+
+            except requests.exceptions.Timeout:
+                print(f"Model {model_name} timed out, trying next...")
+                continue
+            except Exception as e:
+                print(f"Model {model_name} error:", e)
+                continue
+
+        return Response({
+            'message': "AI is currently busy due to high traffic. Please try again in a few seconds."
+        }, status=status.HTTP_503_SERVICE_UNAVAILABLE)

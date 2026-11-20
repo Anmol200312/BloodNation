@@ -3,13 +3,86 @@ const bloodStock = document.getElementById('bloodStockPat');
 const myRequest = document.getElementById('requestPat');
 const heading = document.querySelector('h2');
 
+
+let allBloodStock = [];
+let allMyRequest = [];
+
+
 document.getElementById('logoutPat').addEventListener('click', logoutUser);
+
+const inputBlood = document.getElementById('inputBlood');
+const inputReq = document.getElementById('inputReq');
+
+
+inputBlood.addEventListener('input', (e) => {
+    let value = e.target.value.toLowerCase().trim();
+    let filteredData = allBloodStock.filter(stock => {
+        return (
+            stock.blood_group?.toLowerCase().includes(value) ||
+            String(stock.quantity_in_units).includes(value) ||
+            String(stock.hospital_details?.contact_number).includes(value) ||
+            stock.hospital_details?.address?.toLowerCase().includes(value)
+        )
+    });
+    renderBloodStock(filteredData);
+})
+
+inputReq.addEventListener('input', (e) => {
+    value = e.target.value.toLowerCase().trim();
+    let filteredData = allMyRequest.filter(req => {
+        return (
+            req.blood_group_required.toLowerCase().includes(value) ||
+            String(req.units_required).includes(value) ||
+            req.patient_name?.name?.toLowerCase().includes(value) ||
+            req.accepted_by_donor?.name?.toLowerCase().includes(value) ||
+            req.donation_location.toLowerCase().includes(value) ||
+            req.status.toLowerCase().includes(value)
+        )
+    });
+    renderBloodRequest(filteredData);
+})
+
+
+function renderBloodStock(data) {
+    if (Array.isArray(data) && data.length > 0) {
+        bloodStock.innerHTML = data.map(blood => `
+                    <h4>${blood.blood_group}</h4>
+                    <div class="bloodDivOne"> 
+            <div class="bloodDivTwo"><h5>Units</h5>${blood.quantity_in_units}</div>
+            <div class="bloodDivTwo"><h5>Hospital</h5>${blood.hospital_details?.name || blood.hospital?.name || blood.hospital || 'N/A'}</div>
+            <div class="bloodDivTwo"><h5>Contact</h5>${blood.hospital_details?.contact_number || blood.hospital?.contact_number || 'N/A'}</div>
+            <div class="bloodDivTwo"><h5>Address</h5>${blood.hospital_details?.address || blood.hospital?.address || 'N/A'}</div>
+                    </div>`
+        ).join('');
+    } else {
+        bloodStock.innerHTML = "<h4>No stock is available</h4>";
+    }
+}
+
+function renderBloodRequest(data) {
+    if (Array.isArray(data) && data.length > 0) {
+        myRequest.innerHTML = data.map(req => `
+                    <h4>${req.blood_group_required}</h4>
+                    <div class="reqDivOne">
+                    <div class="reqDivTwo"><h5>Units</h5>${req.units_required}</div>
+                    <div class="reqDivTwo"><h5>Patient Name</h5>${req.patient?.name}</div>
+                    <div class="reqDivTwo"><h5>Donor Name</h5>${req.accepted_by_donor?.name || 'Not Accepted Yet'}</div>
+                    <div class="reqDivTwo"><h5>Donation Location</h5>${req.donation_location}</div>
+                    <div class="reqDivTwo"><h5>Status</h5>${req.status}</div>
+                    </div>`
+        ).join('');
+    } else {
+        myRequest.innerHTML = "<h4>No request is registered yet</h4>";
+    }
+}
+
+
 
 
 async function loadDashboard() {
     try {
         const response = await authFetch('/api/patient/dashboard/', {
-            method: "GET"
+            method: "GET",
         });
 
         const result = await response.json();
@@ -24,53 +97,37 @@ async function loadDashboard() {
                     <div class="proDivTwo"><h5>Email</h5>${pro.email || 'N/A'}</div>
                     <div class="proDivTwo"><h5>Address</h5>${pro.city || 'Not Provided'}</div>
                     <div class="proDivTwo"><h5>Blood Group</h5>${pro.blood_group_required}</div>
-                    <div class="proDivTwo"><h5>Admit Hospital</h5>${pro.current_hospital.name || pro.hospital_details?.name || 'None'}</div> 
+                    <div class="proDivTwo"><h5>Admit Hospital</h5>${pro.current_hospital?.name || pro.hospital_details?.name || 'None'}</div> 
                     <div class="proDivTwo"><h5>Disease History</h5>${pro.disease_history || 'None'}</div> 
                     </div>`
             }
 
-            if (Array.isArray(result.hospital_blood_stock) && result.hospital_blood_stock.length > 0) {
-                bloodStock.innerHTML = result.hospital_blood_stock.map(blood => `
-                    <h4>${blood.blood_group}</h4>
-                    <div class="bloodDivOne"> 
-            <div class="bloodDivTwo"><h5>Units</h5>${blood.quantity_in_units}</div>
-            <div class="bloodDivTwo"><h5>Hospital</h5>${blood.hospital_details?.name || blood.hospital?.name || blood.hospital || 'N/A'}</div>
-            <div class="bloodDivTwo"><h5>Contact</h5>${blood.hospital_details?.contact_number || blood.hospital?.contact_number || 'N/A'}</div>
-            <div class="bloodDivTwo"><h5>Address</h5>${blood.hospital_details?.address || blood.hospital?.address || 'N/A'}</div>
-                    </div>`
-                ).join('');
-            } else {
-                bloodStock.innerHTML = "<h4>No stock is available</h4>";
-            }
+            allBloodStock = result.hospital_blood_stock;
+            allMyRequest = result.my_requests;
 
-            if (Array.isArray(result.my_requests) && result.my_requests.length > 0) {
-                myRequest.innerHTML = result.my_requests.map(req => `
-                    <h4>${req.blood_group_required}</h4>
-                    <div class="reqDivOne">
-                    <div class="reqDivTwo"><h5>Units</h5>${req.units_required}</div>
-                    <div class="reqDivTwo"><h5>Hospital</h5>${req.hospital_details?.name || req.hospital?.name || 'N/A'}</div>
-                    <div class="reqDivTwo"><h5>Contact</h5>${req.hospital_details?.contact_number || req.hospital?.contact_number || 'N/A'}</div>
-                    <div class="reqDivTwo"><h5>Address</h5>${req.hospital_details?.address || req.hospital?.address || 'N/A'}</div>
-                    <div class="reqDivTwo"><h5>Doctor</h5>${req.assigned_doctor?.name || 'Not Assigned'}</div>
-                    <div class="reqDivTwo"><h5>Donor</h5>${req.accepted_by_donor?.name || 'Waiting for Donor'}</div>
-                    <div class="reqDivTwo"><h5>Date</h5>${req.patient_delivery_date ? new Date(req.patient_delivery_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Not Scheduled'}</div>
-                    <div class="reqDivTwo"><h5>Status</h5>${req.status}</div>
-                    </div>`
-                ).join('');
-            } else {
-                myRequest.innerHTML = "<h4>No request is registered yet</h4>";
-            }
+
+            renderBloodStock(allBloodStock);
+            renderBloodRequest(allMyRequest);
+
         }
 
-        else if (response.status == 401 || response.status == 403) {
+        else if (response.status === 401 || response.status == 403) {
             alert(result.message);
-            logoutUser();
+            // logoutUser();
         }
     }
+
     catch (error) {
         console.log(error);
         alert("Connection lost with server");
     }
 }
 
-loadDashboard();
+loadDashboard(); // When page starts to load fetch the data
+
+
+
+
+
+
+

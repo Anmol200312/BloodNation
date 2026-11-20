@@ -219,3 +219,36 @@ class ChangePasswordSerializer(serializers.Serializer):
         if attrs['new_password'] != attrs['confirm_password']:
             raise serializers.ValidationError({"password":"Passwords dont match"})
         return attrs
+
+
+class ChatBotSerializer(serializers.Serializer):
+    input_field = serializers.CharField(max_length=500,trim_whitespace=True,required=True,error_messages={
+            "blank": "Please type a message.",
+            "max_length": "Please keep your question under 500 characters."
+        }
+    )
+
+    ALLOWED_KEYWORDS = [
+        'blood', 'donate', 'donation', 'donor', 'patient', 'hospital', 'doctor',
+        'bloodnation', 'blood nation', 'stock', 'unit', 'units', 'group', 'plasma',
+        'platelet', 'platelets', 'rbc', 'hemoglobin', 'eligible', 'eligibility',
+        'request', 'emergency', 'transfusion', 'bank', 'register', 'login',
+        'dashboard', 'account', 'verify', 'verification', 'appointment', 'home',
+        'a+', 'a-', 'b+', 'b-', 'ab+', 'ab-', 'o+', 'o-', 'positive', 'negative',
+        'hi', 'hello', 'hey', 'namaste'
+    ]
+
+    def validate_input_field(self,value):
+        text_lower = value.lower()
+        is_matched = False
+        for keyword in self.ALLOWED_KEYWORDS:
+            if keyword in text_lower:
+                is_matched = True
+                break
+
+        if not is_matched:
+            raise serializers.ValidationError(
+                "I am the BloodNation AI Assistant. I can only answer questions related to Blood, BloodNation, Blood Donation, and Blood Availability."
+            )
+        return value
+
