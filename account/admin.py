@@ -1,5 +1,5 @@
 from django.contrib import admin
-from account.models import User,Doctor,Patient,Donor,BloodRequest,BloodStock,Hospital,BloodDonation
+from account.models import User,Doctor,Patient,Donor,BloodRequest,BloodStock,Hospital,BloodDonation,AdminProfile
 from django.contrib.auth.admin import UserAdmin
 
 class UserModelAdmin(UserAdmin):
@@ -27,6 +27,18 @@ class UserModelAdmin(UserAdmin):
     ordering = ['email'] 
     filter_horizontal = ['groups', 'user_permissions']
 admin.site.register(User,UserModelAdmin)
+
+
+class AdminProfileAdmin(admin.ModelAdmin):
+    list_display = ['name','get_email','phone','created_at']
+    list_filter = ['name','user__email']
+    list_select_related = ['user']
+
+    def get_email(self,obj):
+        return obj.user.email
+    get_email.short_description = 'Email'
+admin.site.register(AdminProfile,AdminProfileAdmin)
+
 
 
 class HospitalAdmin(admin.ModelAdmin):

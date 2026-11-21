@@ -345,3 +345,71 @@ h5:hover {
     box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
     transform: translateY(-7px) scale(1.0);
 }
+
+
+
+.picDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+#profileDiv {
+    width: 180px;
+    height: 180px;
+    border: 6px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#profileContainer {
+    display: flex;
+    width: 200px;
+    height: 200px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 1px solid purple;
+    background-color: #f8a5c2;
+    border-radius: 4px;
+}
+
+#closePic {
+    width: 100%;
+    height: 22px;
+    text-align: end;
+    color: purple;
+    border-bottom: 1px solid purple;
+    cursor: pointer;
+    padding-right: 7px;
+    font-size: large;
+}
+
+#profileForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 200px;
+    color: purple;
+}
+
+#picButton {
+    width: 100%;
+    border-top: 1px solid purple;
+    border-radius: 4px;
+    height: 20px;
+    font: purple;
+    color: purple;
+    cursor: pointer;
+}
+
+#profileInput {
+    width: 100%;
+}

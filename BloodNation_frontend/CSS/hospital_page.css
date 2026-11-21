@@ -99,7 +99,7 @@ header .logo.active {
 main {
     width: 100%;
     display: grid;
-    grid-template-rows: repeat(5, auto);
+    grid-template-rows: repeat(6, auto);
     align-items: center;
     justify-content: stretch;
     padding: 0px 20px;
@@ -378,4 +378,23 @@ h5:hover {
     border: 1px solid rgb(69, 69, 229);
     box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
     transform: translateY(-7px) scale(1.0);
+}
+
+.picDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+#profileDiv {
+    width: 180px;
+    height: 180px;
+    border: 6px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }

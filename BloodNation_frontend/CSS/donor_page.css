@@ -317,3 +317,23 @@ h5:hover {
     box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
     transform: translateY(-7px) scale(1.0);
 }
+
+
+.picDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+#profileDiv {
+    width: 180px;
+    height: 180px;
+    border: 6px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}

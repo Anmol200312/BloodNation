@@ -5,9 +5,12 @@ async function authFetch(endpoints, options = {}) {  // endpoints is the url of 
 
     options.headers = {  // from options object taking header object
         ...options.headers,  // unpacking all the objects of headers
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`  // putting the accessToken in Authorization
     };
+
+    if (!(options.body instanceof FormData)) {
+        options.headers['Content-Type'] = 'application/json';
+    }
 
     const response = await fetch(BACKEND_URL + endpoints, options);  // getting the accessToken header from  the endpoint
     if (response.status == 401) {  // if accessToken is expired 

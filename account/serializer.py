@@ -177,6 +177,9 @@ class HospitalDetailSerializer(ModelSerializer):
         ]
 
 class AdminDashboardSerializer(serializers.Serializer):
+    admin_name = serializers.CharField(required=False)
+    admin_phone = serializers.IntegerField(required=False)
+    admin_email = serializers.EmailField(required=False)
     total_hospitals = serializers.IntegerField()
     total_doctors = serializers.IntegerField()
     total_donors = serializers.IntegerField()
@@ -219,6 +222,11 @@ class ChangePasswordSerializer(serializers.Serializer):
         if attrs['new_password'] != attrs['confirm_password']:
             raise serializers.ValidationError({"password":"Passwords dont match"})
         return attrs
+
+class ProfilePicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['profile_pic']
 
 
 class ChatBotSerializer(serializers.Serializer):

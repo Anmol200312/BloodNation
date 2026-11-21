@@ -2,6 +2,8 @@ const hospitals = document.getElementById('hospitalsAdmin');
 const users = document.getElementById('usersAdmin');
 const requests = document.getElementById('requestAdmin');
 const donation = document.getElementById('donationAdmin');
+const heading = document.querySelector('main h2');
+const profileAdmin = document.getElementById('profileAdmin');
 
 const totalHos = document.getElementById('totalHos');
 const totalDoc = document.getElementById('totalDoc');
@@ -159,6 +161,11 @@ async function loadDashboard() {
         const result = await response.json();
 
         if (response.status == 200) {
+            heading.textContent = `${result.admin_name || 'Admin'} Dashboard`;
+            profileAdmin.innerHTML = `<h4>${result.admin_name}</h4>
+                    <div class="adminDivOne">
+                    <div class="adminDivTwo"><h5>Phone</h5>${result.admin_phone}</div>
+                    <div class="adminDivTwo"><h5>Email</h5>${result.admin_email}</div>`;
             totalHos.innerHTML = `<h5>All Hospitals</h5>${result.total_hospitals ?? 0}`;
             totalDoc.innerHTML = `<h5>All Doctors</h5>${result.total_doctors ?? 0}`;
             totalDon.innerHTML = `<h5>All Donors</h5>${result.total_donors ?? 0}`;

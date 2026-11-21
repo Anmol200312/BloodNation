@@ -99,7 +99,7 @@ header .logo.active {
 main {
     width: 100%;
     display: grid;
-    grid-template-rows: repeat(5, auto);
+    grid-template-rows: repeat(6, auto);
     align-items: center;
     justify-content: stretch;
     padding: 0px 20px;
@@ -161,6 +161,8 @@ hr {
 
 .statsDiv:hover,
 .hosDivTwo:hover,
+.adminDivTwo:hover,
+#profileDiv:hover,
 .userDivTwo:hover,
 .requestDivTwo:hover,
 .donorDivTwo:hover {
@@ -231,6 +233,29 @@ hr {
     grid-template-columns: repeat(4, 1fr);
     width: 100%;
     gap: 10px;
+}
+
+.adminDivOne {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    justify-content: end;
+    width: 100%;
+    gap: 20px;
+}
+
+.adminDivTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: white;
+    color: rgb(69, 69, 229);
+    border: 1px solid rgb(86, 86, 135);
+    transition: 0.3s ease;
 }
 
 .requestDivOne {
@@ -372,4 +397,85 @@ h5:hover {
     border: 1px solid rgb(69, 69, 229);
     box-shadow: 0 0 8px rgba(138, 43, 226, 0.5);
     transform: translateY(-7px) scale(1.0);
+}
+
+.picDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+#profileDiv {
+    width: 180px;
+    height: 180px;
+    border: 6px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#profileDiv img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#profileContainer {
+    display: flex;
+    width: 240px;
+    min-height: 200px;
+    height: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 1px solid purple;
+    background-color: #f8a5c2;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#closePic {
+    width: 100%;
+    height: 22px;
+    text-align: end;
+    color: purple;
+    border-bottom: 1px solid purple;
+    cursor: pointer;
+    padding-right: 7px;
+    font-size: large;
+}
+
+#profileForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 180px;
+    height: auto;
+    color: purple;
+}
+
+#picButton {
+    width: 100%;
+    border: none;
+    border-top: 1px solid purple;
+    border-radius: 4px;
+    height: 20px;
+    font: purple;
+    color: purple;
+    cursor: pointer;
+}
+
+#profileInput {
+    width: 100%;
+}
+
+.cropper-view-box,
+.cropper-face {
+    border-radius: 50%;
 }

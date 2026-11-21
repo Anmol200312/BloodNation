@@ -9,22 +9,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+        integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="CSS/hospital_page.css">
 </head>
 
 <body>
-    <header>
+    <header class="notranslate">
         <a class="logo" href="/">Blood<span>Nation</span>❤️</a>
         <nav>
             <ul class="navlist">
                 <li><a href="home_page.html">Home</a></li>
                 <li><button id="logoutHos">Logout</button></li>
+                <li>
+                    <div class="gtranslate_wrapper"></div>
+                </li>
             </ul>
         </nav>
     </header>
 
     <main>
         <h2></h2>
+        <hr>
+        <div class="picDiv">
+            <div id="profileDiv"></div>
+        </div>
         <hr>
         <div class="selectDiv">
             <h3 class="headingBottom">Doctors</h3>
@@ -59,6 +69,8 @@
 
     <script src="JS/auth.js"></script>
     <script src="JS/hospital_page.js"></script>
+    <script>window.gtranslateSettings = { "default_language": "en", "detect_browser_language": true, "languages": ["en", "hi"], "wrapper_selector": ".gtranslate_wrapper" }</script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/ln.js" defer></script>
 </body>
 
 </html>

@@ -88,18 +88,17 @@ WSGI_APPLICATION = 'BloodNation.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DB_NAME', 'bloodnation_db'),
-        'USER': os.getenv('DB_USER', ''),
+        'USER': os.getenv('DB_USER', 'postgres'),
         'PASSWORD': os.getenv('DB_PASSWORD', ''),
         'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': '',
-        'OPTIONS': {
-            'driver': os.getenv('DB_DRIVER', 'ODBC Driver 17 for SQL Server'),
-            'extra_params': 'TrustServerCertificate=yes;', 
-        },
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
+
+
+
 
 # --- SimpleJWT Authentication Settings ---
 REST_FRAMEWORK = {
@@ -167,3 +166,6 @@ EMAIL_HOST_PASSWORD = os.getenv('BLOODNATION_EMAIL_PASSWORD')
 DEFAULT_FROM_EMAIL = f'BloodNation <{EMAIL_HOST_USER}>'
 
 STATIC_URL = 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

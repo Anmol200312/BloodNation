@@ -9,11 +9,12 @@ from django.conf import settings
 from django.utils.http  import urlsafe_base64_decode,urlsafe_base64_encode
 from django.utils.encoding import force_bytes,force_str
 from django.contrib.auth.tokens import default_token_generator
+from rest_framework.parsers import MultiPartParser, FormParser
 from account.serializer import (
     DonorSerializer, DoctorSerializer, HospitalSerializer, PatientSerializer,
     BloodStockSerializer, BloodRequestSerializer, BloodDonationSerializer,
-    HospitalDetailSerializer, AdminDashboardSerializer,
-    LoginSerializer, ResetPasswordSerializer, ResetPasswordConfirmSerializer, ChangePasswordSerializer,ChatBotSerializer
+    HospitalDetailSerializer, AdminDashboardSerializer,ProfilePicSerializer,
+    LoginSerializer, ResetPasswordSerializer,ResetPasswordConfirmSerializer, ChangePasswordSerializer,ChatBotSerializer
 )
 from account.models import User, Hospital, Doctor, Donor, Patient, BloodRequest, BloodStock, BloodDonation
 from account.utils import send_activation_email,send_updation_email
@@ -303,12 +304,20 @@ class AdminDashboardAPIView(APIView):
                 'message':"Access Denied,Admins only"
             },status=status.HTTP_403_FORBIDDEN)
 
+        admin_profile = getattr(request.user,'admin_profile',None)
+        admin_name = admin_profile.name if admin_profile else request.user.email
+        admin_phone = admin_profile.phone if admin_profile else request.user.email
+        admin_email = request.user.email
+
         hospitals = Hospital.objects.prefetch_related('doctors', 'donors', 'patients', 'blood_stock', 'blood_request')
         all_requests = BloodRequest.objects.all()
         completed_count = all_requests.filter(status='completed').count()
         left_count = all_requests.exclude(status__in=['completed','rejected']).count()
 
         data = {
+            "admin_name":admin_name,
+            "admin_phone":admin_phone,
+            "admin_email":admin_email,
             "total_hospitals": hospitals.count(),
             "total_doctors": Doctor.objects.count(),
             "total_donors": Donor.objects.count(),
@@ -520,6 +529,29 @@ class CheckAuthAPIView(APIView):
         return Response({
             "role":request.user.role
         },status=status.HTTP_200_OK)
+
+class ProfilePicAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    parser_classes = [MultiPartParser,FormParser]
+
+    def get(self,request):
+        user = request.user
+        pic_url = request.build_absolute_uri(user.profile_pic.url) if user.profile_pic else None
+        return Response({'message':"Pic is available",'profile_pic':pic_url},status=status.HTTP_200_OK)
+
+    def patch(self,request):
+        user = request.user
+        serializer = ProfilePicSerializer(user,data=request.data,partial=True)
+        if serializer.is_valid():
+            if user.profile_pic and 'profile_pic' in request.FILES:
+                user.profile_pic.delete(save=False)
+
+            serializer.save()
+            pic_url = request.build_absolute_uri(user.profile_pic.url) if user.profile_pic else None
+            return Response({'message':"Pic is updated",'profile_pic':pic_url},status=status.HTTP_200_OK)
+
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
 class ChatbotAPIView(APIView):
